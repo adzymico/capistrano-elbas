@@ -49,6 +49,12 @@ autoscale 'app-autoscale-group', user: 'apps', roles: [:app, :web]
 autoscale 'worker-autoscale-group', user: 'apps', roles: [:worker]
 ```
 
+Define how many past AMIs to keep during cleanup. The default is 5.
+
+```ruby
+set :elbas_keep_amis, 5
+```
+
 Run `cap production deploy`.
 
 **As of version 3, your AWS setup must use launch templates as opposed to launch
