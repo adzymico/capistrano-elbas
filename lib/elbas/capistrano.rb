@@ -23,7 +23,11 @@ def autoscale(groupname, properties = {})
   end
 
   if instances.any?
-    after 'deploy', 'elbas:deploy'
+    if properties[:handle_ami] == true
+      after 'deploy', 'elbas:deploy'
+    else
+      info "run `cap production elbas:deploy`"
+    end
   else
     error <<~MESSAGE
       Could not create AMI because no running instances were found in the specified
