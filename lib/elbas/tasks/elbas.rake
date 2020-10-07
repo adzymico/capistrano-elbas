@@ -44,4 +44,8 @@ namespace :elbas do
       info "Deployment complete!"
     end
   end
+
+  task :notify_about_deploy do
+    info "IMPORTANT!!! run `cap production elbas:deploy`"
+  end
 end

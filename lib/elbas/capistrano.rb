@@ -20,13 +20,13 @@ def autoscale(groupname, properties = {})
     props ||= properties
 
     server instance.hostname, props
-
-    info "run `cap production elbas:deploy`" unless properties[:handle_ami] == true
   end
 
   if instances.any?
     if properties[:handle_ami] == true
       after 'deploy', 'elbas:deploy'
+    else
+      after 'deploy', 'elbas:notify_about_deploy'
     end
   else
     error <<~MESSAGE
